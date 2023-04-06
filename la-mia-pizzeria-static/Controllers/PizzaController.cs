@@ -14,5 +14,20 @@ namespace la_mia_pizzeria_static.Controllers
 
             return View(pizze);
         }
+
+        [HttpGet]
+        public IActionResult Show(int Id) 
+        {
+            using var ctx = new PizzaContext();
+
+            var pizze = ctx.Pizze.SingleOrDefault(p => p.Id == Id);
+
+            if (pizze == null)
+            {
+                return NotFound($"Pizza {Id} non trovata");
+            }
+
+            return View(pizze);
+        }
     }
 }
